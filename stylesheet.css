@@ -1,0 +1,875 @@
+:root {
+  --ink: #fff4e8;
+  --soft: #e4c9d1;
+  --card: rgba(55, 25, 65, .78);
+  --gold1: #f8e2a1;
+  --gold2: #d5a34b;
+  --gold3: #87591d;
+  --bg1: #4a1f48;
+  --bg2: #1a0d24;
+  --bg3: #0c0714;
+  --shadow: rgba(0, 0, 0, .45);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    var(--bg1),
+    var(--bg2) 55%,
+    var(--bg3)
+  ) fixed;
+  overflow-x: hidden;
+}
+
+body.locked {
+  overflow: hidden;
+  height: 100vh;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.gold {
+  background: linear-gradient(
+    135deg,
+    var(--gold1),
+    var(--gold2) 48%,
+    var(--gold1) 65%,
+    var(--gold3)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.script {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(32px, 7vw, 48px);
+}
+
+h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 100%);
+  margin: auto;
+  padding: 30px 20px 60px;
+}
+
+section {
+  margin-top: 75px;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(30px, 6vw, 42px);
+  margin: 8px 0 25px;
+}
+
+.hero {
+  margin-top: 15px;
+}
+
+.hero p {
+  max-width: 560px;
+  margin: 18px auto 0;
+  color: var(--soft);
+  line-height: 1.9;
+  font-size: 15px;
+}
+
+.six {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  font-size: clamp(130px, 32vw, 190px);
+  line-height: .9;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,.35));
+}
+
+.mo {
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.names {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(21px, 5vw, 28px);
+  margin-top: 15px;
+  color: var(--soft);
+}
+
+.days {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 8px 22px;
+  border: 1px solid var(--gold2);
+  border-radius: 99px;
+  font-size: 14px;
+  color: var(--soft);
+}
+
+.days b {
+  color: var(--gold1);
+  font-size: 18px;
+}
+
+/* Background effects */
+
+#fx {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bokeh {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(249,227,166,.45),
+    transparent 70%
+  );
+  animation: pulse 7s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.3);
+    opacity: .4;
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--gold1);
+  clip-path: polygon(
+    50% 0, 62% 38%, 100% 50%, 62% 62%,
+    50% 100%, 38% 62%, 0 50%, 38% 38%
+  );
+  animation: twinkle 3s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes twinkle {
+  50% {
+    opacity: 1;
+    transform: scale(1.8) rotate(45deg);
+  }
+}
+
+/* Surprise cover */
+
+#cover {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  cursor: pointer;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    var(--bg1),
+    var(--bg2) 60%,
+    var(--bg3)
+  );
+  transition: opacity 1s, transform 1s;
+}
+
+#cover.gone {
+  opacity: 0;
+  transform: scale(1.12);
+  pointer-events: none;
+}
+
+.gift {
+  font-size: clamp(75px, 18vw, 110px);
+  animation: bob 1.6s ease-in-out infinite;
+  filter: drop-shadow(0 12px 20px var(--shadow));
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(-15px) rotate(-5deg);
+  }
+}
+
+#cover small {
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--soft);
+  font-size: 12px;
+}
+
+/* Kids cards */
+
+.kids-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.card {
+  padding: 9px;
+  border-radius: 25px;
+  background: linear-gradient(
+    135deg,
+    var(--gold1),
+    var(--gold3) 42%,
+    var(--gold2) 72%,
+    var(--gold1)
+  );
+  box-shadow: 0 25px 55px -20px var(--shadow);
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity .8s, transform .8s;
+}
+
+.card.show {
+  opacity: 1;
+  transform: none;
+}
+
+.card-inner {
+  height: 100%;
+  padding: 22px 18px 25px;
+  border-radius: 17px;
+  background: var(--card);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(249,227,166,.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 5px 13px;
+  border-radius: 99px;
+}
+
+.tag {
+  font-family: "Great Vibes", cursive;
+  font-size: 30px;
+  margin: 9px 0 14px;
+}
+
+.kid-photo {
+  width: min(100%, 220px);
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 120px 120px 15px 15px;
+  padding: 5px;
+  background: linear-gradient(
+    145deg,
+    var(--gold1),
+    var(--gold3),
+    var(--gold2)
+  );
+  box-shadow: 0 15px 30px rgba(0,0,0,.35);
+}
+
+.card h2 {
+  font-size: 31px;
+  margin: 18px 0 5px;
+}
+
+.age {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--soft);
+  max-width: 31ch;
+}
+
+.hug {
+  margin-top: 16px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 18px;
+  border-radius: 99px;
+  transition: .25s;
+}
+
+.hug:hover {
+  background: var(--accent);
+  color: #25152b;
+}
+
+/* Cake */
+
+.cakebox {
+  display: inline-block;
+  width: min(100%, 360px);
+  padding: 25px 20px 28px;
+  border-radius: 25px;
+  background: var(--card);
+  border: 1px solid rgba(249,227,166,.35);
+  backdrop-filter: blur(14px);
+}
+
+.cake {
+  display: block;
+  width: min(64vw, 260px);
+  margin: auto;
+}
+
+.flame {
+  transform-origin: 50% 100%;
+  animation: flicker .35s ease-in-out infinite alternate;
+  transition: opacity .5s;
+}
+
+.out .flame {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes flicker {
+  from { transform: scale(1) skewX(-3deg); }
+  to { transform: scale(.88,1.12) skewX(4deg); }
+}
+
+.gbtn {
+  margin-top: 14px;
+  border: 0;
+  background: linear-gradient(135deg, var(--gold1), var(--gold2));
+  color: #39240b;
+  padding: 11px 24px;
+  border-radius: 99px;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  transition: transform .2s, filter .2s;
+}
+
+.gbtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+#wishmsg {
+  min-height: 32px;
+  margin-top: 12px;
+  font-family: "Great Vibes", cursive;
+  font-size: 28px;
+}
+
+/* Responsive gallery */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: clamp(150px, 18vw, 230px);
+  gap: 14px;
+  width: 100%;
+}
+
+.gallery-item {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 2px solid var(--gold2);
+  border-radius: 17px;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  box-shadow: 0 12px 28px rgba(0,0,0,.3);
+  cursor: zoom-in;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .5s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+.gallery-item:nth-child(1) {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.gallery-item:nth-child(2) {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.gallery-item:nth-child(3) {
+  grid-column: 3 / 5;
+  grid-row: 1 / 3;
+}
+
+.gallery-item:nth-child(4) {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+}
+
+.gallery-item:nth-child(5) {
+  grid-column: 1 / 5;
+  grid-row: 3 / 4;
+}
+
+/* Wishes */
+
+.wish-form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  max-width: 440px;
+  margin: 0 auto 25px;
+}
+
+.wish-form input,
+.wish-form textarea {
+  width: 100%;
+  font: 14px "Poppins", sans-serif;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--gold2);
+  background: var(--card);
+  color: var(--ink);
+  outline: none;
+}
+
+.wish-form input:focus,
+.wish-form textarea:focus {
+  border-color: var(--gold1);
+  box-shadow: 0 0 0 3px rgba(248,226,161,.12);
+}
+
+.wish-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.wish-form input::placeholder,
+.wish-form textarea::placeholder {
+  color: #cdb5c8;
+}
+
+.wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 13px;
+  text-align: left;
+}
+
+.note {
+  background: var(--card);
+  border: 1px solid rgba(249,227,166,.3);
+  border-left: 4px solid var(--gold2);
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--soft);
+  overflow-wrap: anywhere;
+}
+
+.note b {
+  display: block;
+  color: var(--gold1);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.share {
+  display: inline-block;
+  margin-top: 22px;
+  color: var(--gold1);
+  text-decoration: none;
+  border: 1px solid var(--gold2);
+  padding: 9px 18px;
+  border-radius: 99px;
+}
+
+footer {
+  margin-top: 55px;
+  color: var(--soft);
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Music button */
+
+#music {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 60;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--gold2);
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  font-size: 20px;
+  color: var(--ink);
+}
+
+#music.on {
+  animation: pulse 2s infinite;
+}
+
+/* Confetti */
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 80;
+}
+
+/* Balloons */
+
+#balloons {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  width: 48px;
+  height: 62px;
+  border-radius: 50% 50% 47% 47%;
+  pointer-events: auto;
+  cursor: pointer;
+  background: radial-gradient(
+    circle at 30% 24%,
+    rgba(255,255,255,.9) 0 6%,
+    transparent 20%
+  ), radial-gradient(
+    circle at 40% 35%,
+    var(--b1),
+    var(--b2) 85%
+  );
+  box-shadow:
+    inset -8px -10px 16px rgba(0,0,0,.25),
+    0 7px 15px rgba(0,0,0,.2);
+  animation: rise linear forwards;
+}
+
+.balloon::before {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-bottom: 9px solid var(--b2);
+  border-top: 0;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  height: 85px;
+  width: 1px;
+  background: linear-gradient(var(--gold1), transparent);
+}
+
+@keyframes rise {
+  to { transform: translateY(-125vh); }
+}
+
+/* Hearts */
+
+.heart {
+  position: fixed;
+  z-index: 70;
+  font-size: 23px;
+  pointer-events: none;
+  animation: heartfloat 1.4s ease-out forwards;
+}
+
+@keyframes heartfloat {
+  to {
+    transform: translateY(-130px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Lightbox */
+
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0,0,0,.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#lightbox.open {
+  display: flex;
+}
+
+#lightbox img {
+  max-width: 95%;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 3px solid var(--gold2);
+}
+
+#close-lightbox {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gold2);
+  border-radius: 50%;
+  color: white;
+  background: var(--card);
+  font-size: 20px;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  main {
+    width: min(760px, 100%);
+  }
+
+  .kids-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 650px;
+    margin: auto;
+  }
+
+  .card:last-child {
+    grid-column: 1 / -1;
+    width: min(100%, 315px);
+    justify-self: center;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: clamp(150px, 28vw, 220px);
+  }
+
+  .gallery-item:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .gallery-item:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .gallery-item:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2 / 4;
+  }
+
+  .gallery-item:nth-child(4) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .gallery-item:nth-child(5) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  main {
+    padding: 22px 14px 45px;
+  }
+
+  section {
+    margin-top: 55px;
+  }
+
+  .hero {
+    margin-top: 20px;
+  }
+
+  .hero p {
+    font-size: 13px;
+    line-height: 1.8;
+    padding: 0 5px;
+  }
+
+  .mo {
+    font-size: 19px;
+    letter-spacing: 8px;
+  }
+
+  .kids-grid {
+    grid-template-columns: 1fr;
+    max-width: 370px;
+    gap: 20px;
+  }
+
+  .card:last-child {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .card-inner {
+    padding: 22px 18px;
+  }
+
+  .kid-photo {
+    width: min(75%, 220px);
+  }
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .cakebox {
+    padding: 20px 14px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: clamp(125px, 34vw, 200px);
+    gap: 10px;
+  }
+
+  .gallery-item:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .gallery-item:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .gallery-item:nth-child(3) {
+    grid-column: 1 / 3;
+    grid-row: 2 / 4;
+  }
+
+  .gallery-item:nth-child(4) {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .gallery-item:nth-child(5) {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .wish-form {
+    width: 100%;
+  }
+
+  .wall {
+    grid-template-columns: 1fr;
+  }
+
+  #music {
+    width: 42px;
+    height: 42px;
+    top: 10px;
+    right: 10px;
+  }
+
+  footer {
+    margin-top: 40px;
+    line-height: 1.8;
+  }
+}
+
+/* Small phones */
+
+@media (max-width: 360px) {
+  main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .mo {
+    letter-spacing: 6px;
+  }
+
+  .card h2 {
+    font-size: 26px;
+  }
+
+  .gbtn {
+    padding: 10px 17px;
+    font-size: 13px;
+  }
+
+  .gallery {
+    grid-auto-rows: 125px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
